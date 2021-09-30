@@ -2,6 +2,7 @@ let myList = document.getElementById("list");
 let doneList = document.getElementById("donelist");
 let noitem = document.getElementById("noitem");
 let doneitem = document.getElementById("doneitem")
+let itemContent = document.getElementById("itemname");
 let count = todoCount = todoneCount = countDone = x = y = 0;
 let todo = [];
 let todone = [];
@@ -85,25 +86,25 @@ const Todo = {
     },
 
     additem_whenenter(e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && itemContent.value) {
             additem_todo('new');
         }
     },
 
     display_title() {
-    if (count === 0) {
-        noitem.style.display = "block";
+        if (count === 0) {
+            noitem.style.display = "block";
+        }
+        if (count !== 0) {
+            noitem.style.display = "none";
+        }
+        if (countDone === 0) {
+            doneitem.style.display = "block";
+        }
+        if (countDone !== 0) {
+            doneitem.style.display = "none";
+        }
     }
-    if (count !== 0) {
-        noitem.style.display = "none";
-    }
-    if (countDone === 0) {
-        doneitem.style.display = "block";
-    }
-    if (countDone !== 0) {
-        doneitem.style.display = "none";
-    }
-}
 }
 
 
@@ -121,6 +122,7 @@ while (todoneCount > 0) {
 }
 
 function additem_todo(flag) {
+    console.log(flag)
     let item = document.createElement("li");
     let span = document.createElement("span");
     let check = document.createElement("input");
@@ -156,7 +158,6 @@ function additem_todo(flag) {
             break;
         }
         default: {
-            let itemContent = document.getElementById("itemname");
             todo.push(itemContent.value);
             Todo.save_list();
             span.innerHTML = itemContent.value;
@@ -213,7 +214,8 @@ function additem_todo(flag) {
 
     });
 
-    span.addEventListener("dblclick", function () {
+
+    const myFunc = function () {
 
         let data = this.innerHTML;
         let parent = this.parentElement;
@@ -223,14 +225,20 @@ function additem_todo(flag) {
         let ok = document.createElement("button");
         let cancel = document.createElement("button");
 
+
         text.value = data;
         ok.innerHTML = "OK";
         cancel.innerHTML = "Cancel";
 
-        form.appendChild(text);
-        form.appendChild(ok);
-        form.appendChild(cancel);
-        span.appendChild(form);
+        console.log(data)
+
+        if (typeof data === 'string') {
+            form.appendChild(text);
+            form.appendChild(ok);
+            form.appendChild(cancel);
+            span.appendChild(form);
+        }
+
 
         ok.addEventListener("click", function () {
             span.removeChild(form);
@@ -240,14 +248,18 @@ function additem_todo(flag) {
             data = text.value;
             span.innerHTML = data;
             parent.appendChild(span);
+            span.addEventListener("dblclick", myFunc)
         });
 
         cancel.addEventListener("click", function () {
             span.removeChild(form);
             span.innerHTML = data;
             parent.appendChild(span);
+            span.addEventListener("dblclick", myFunc)
         });
-    });
+        span.removeEventListener("dblclick", myFunc);
+    }
+    span.addEventListener("dblclick", myFunc)
 }
 
 
