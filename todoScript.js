@@ -1,8 +1,8 @@
-let myList = document.getElementById("list");
-let doneList = document.getElementById("donelist");
-let noitem = document.getElementById("noitem");
-let doneitem = document.getElementById("doneitem")
-let itemContent = document.getElementById("itemname");
+const myList = document.getElementById("list");
+const doneList = document.getElementById("donelist");
+const noitem = document.getElementById("noitem");
+const doneitem = document.getElementById("doneitem")
+const itemContent = document.getElementById("itemname");
 let count = todoCount = todoneCount = countDone = x = y = 0;
 let todo = [];
 let todone = [];
