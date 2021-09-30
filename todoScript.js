@@ -27,30 +27,30 @@ const TodoHelper = {
 
 const Todo = {
     save_count() {
-        let localCount = count;
-        let localCountDone = countDone;
+        const localCount = count;
+        const localCountDone = countDone;
         localStorage.setItem("count", localCount);
         localStorage.setItem("countDone", localCountDone);
     },
 
     get_count() {
-        let localCount = localStorage.getItem("count");
-        let localCountDone = localStorage.getItem("countDone");
+        const localCount = localStorage.getItem("count");
+        const localCountDone = localStorage.getItem("countDone");
         count = localCount;
         countDone = localCountDone;
     },
 
     save_list() {
-        let str = JSON.stringify(todo);
-        let str1 = JSON.stringify(todone);
+        const str = JSON.stringify(todo);
+        const str1 = JSON.stringify(todone);
         localStorage.setItem("todo", str);
         localStorage.setItem("todone", str1);
 
     },
 
     get_list() {
-        let str = localStorage.getItem("todo");
-        let str1 = localStorage.getItem("todone");
+        const str = localStorage.getItem("todo");
+        const str1 = localStorage.getItem("todone");
 
         todo = JSON.parse(str);
         todone = JSON.parse(str1);
@@ -69,7 +69,7 @@ const Todo = {
     },
 
     remove_list(id) {
-        let root = document.getElementById(id);
+        const root = document.getElementById(id);
         while (root.firstChild) {
             root.removeChild(document.getElementById(id).firstChild);
 
@@ -123,10 +123,10 @@ while (todoneCount > 0) {
 
 function additem_todo(flag) {
     console.log(flag)
-    let item = document.createElement("li");
-    let span = document.createElement("span");
-    let check = document.createElement("input");
-    let spanimg = document.createElement("span");
+    const item = document.createElement("li");
+    const span = document.createElement("span");
+    const check = document.createElement("input");
+    const spanimg = document.createElement("span");
     item.appendChild(check);
 
     item.appendChild(spanimg);
@@ -141,7 +141,7 @@ function additem_todo(flag) {
 
     switch (flag) {
         case "todo": {
-            let itemContent = todo[x];
+            const itemContent = todo[x];
             span.innerHTML = itemContent;
             myList.appendChild(item);
             x++;
@@ -150,7 +150,7 @@ function additem_todo(flag) {
         }
         case 'todone': {
             check.checked = true;
-            let itemContent = todone[y];
+            const itemContent = todone[y];
             span.innerHTML = itemContent;
             doneList.appendChild(item);
             y++;
@@ -172,7 +172,7 @@ function additem_todo(flag) {
 
     check.addEventListener("change", function () {
 
-        let doneItem = this.parentElement;
+        const doneItem = this.parentElement;
         temp = doneItem.childNodes[2].innerHTML;
         if (myList.id == this.parentElement.parentElement.id) {
             myList.removeChild(doneItem);
@@ -198,7 +198,7 @@ function additem_todo(flag) {
 
     spanimg.addEventListener("click", function () {
 
-        let removeItem = this.parentElement;
+        const removeItem = this.parentElement;
         temp = removeItem.childNodes[2].innerHTML;
 
         if (myList.id == this.parentElement.parentElement.id) {
@@ -218,12 +218,12 @@ function additem_todo(flag) {
     const myFunc = function () {
 
         let data = this.innerHTML;
-        let parent = this.parentElement;
+        const parent = this.parentElement;
         span.innerHTML = "";
-        let form = document.createElement("span");
-        let text = document.createElement("input");
-        let ok = document.createElement("button");
-        let cancel = document.createElement("button");
+        const form = document.createElement("span");
+        const text = document.createElement("input");
+        const ok = document.createElement("button");
+        const cancel = document.createElement("button");
 
 
         text.value = data;
